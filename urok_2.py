@@ -39,7 +39,7 @@ wrap.sprite.add_text('Я предлагаю у последнего уровня
 time.sleep(2)
 wrap.sprite.add_text('Договорились',700,350)
 time.sleep(1.5)
-wrap.sprite.add_text('Я уще приведу своего друга, пока',700,300)
+wrap.sprite.add_text('Я еще приведу своего друга, пока',700,300)
 
 time.sleep(2)
 wrap.sprite.add_text('Хорошо, счастливо!',300,300)
