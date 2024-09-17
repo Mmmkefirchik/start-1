@@ -1,3 +1,4 @@
+q=67463
 import  wrap,time
 wrap.world.set_back_color(255,255,255)
 wrap.world.create_world(1000,1000)
@@ -40,7 +41,7 @@ time.sleep(2)
 wrap.sprite.add_text('ВОТ ТАК И ПОЗНОКОМИЛИСЬ КОИН И ЗВЕЗДОЧКА!',500,100)
 
 
-
+print(q)
 
 
 
