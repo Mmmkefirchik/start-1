@@ -40,7 +40,12 @@ wrap.sprite.add('pacman',x4,y4,'player1')
 time.sleep(1.5)
 
 wrap.actions.move_to(10,x1,y1)
+time.sleep(0.2)
 
+wrap.actions.move_to(10,x3,y3)
+time.sleep(0.2)
 
+wrap.actions.move_to(10,x2,y2)
+time.sleep(0.2)
 
 
