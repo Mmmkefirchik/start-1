@@ -31,10 +31,13 @@ mesto_privideniya_y= mesto_tochci_y - (height_pacman // 2 + height_prividenie)
 mesto_privideniya_x=random.randint(mesto_tochci_x-50,mesto_tochci_x+50)
 
 nomer_prividenie=wrap.sprite.add('pacman', mesto_privideniya_x, mesto_privideniya_y, 'enemy_red_right1')
+rasmer_privideniya=random.randint(26, 100)
+wrap.sprite.set_height_proportionally(nomer_prividenie, rasmer_privideniya)
+height_prividenie=wrap.sprite.get_height(nomer_prividenie)
 
 mesto_texta_y= mesto_privideniya_y - (height_prividenie // 2 + 20)
 
-wrap.sprite.add_text('Ага, попался!', mesto_privideniya_y, mesto_texta_y, text_color=[255, 255, 255])
+wrap.sprite.add_text('Ага, попался!', mesto_privideniya_x, mesto_texta_y, text_color=[255, 255, 255])
 
 
 
