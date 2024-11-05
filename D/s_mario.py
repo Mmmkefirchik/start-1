@@ -23,6 +23,9 @@ wrap.sprite.add('pacman',70,70,'dot')
 #
 # wrap.actions.move_to(nomer_mario,mario_v_x,mario_v_y)
 
-rastoyanie_do_klada=math.sqrt(klad_v_x*klad_v_x+klad_v_y*klad_v_y)
+katet_1y=klad_v_y-(klad_v_y-50)
+katet_1x=klad_v_x-(klad_v_x-50)
+
+rastoyanie_do_klada=math.sqrt(katet_1y*katet_1y+katet_1x*katet_1x)
 
 print(rastoyanie_do_klada)
