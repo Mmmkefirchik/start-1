@@ -17,6 +17,8 @@ katet_x=mesto_tochci2_x-mesto_tochci1_x
 
 rastoyanie_ot_dot_do_dot=math.sqrt(katet_y*katet_y+katet_x*katet_x)
 
+
+
 print(rastoyanie_ot_dot_do_dot)
 
 
