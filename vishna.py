@@ -1,6 +1,4 @@
-import random
-
-vsego=int(input('Скоьлко вишен вы получили?'))
+vsego=int(input('Сколько вишен вы получили?'))
 vsego1 = str(vsego)
 vsego2=vsego%10
 
@@ -23,8 +21,12 @@ elif vsego2==1:
 elif vsego2>=2 and vsego2<=4:
     print('Вы получили '+vsego1+' вишни')
 
-elif vsego2<=5 and vsego2>=0:
+elif vsego2>=0 and vsego2<=5:
     print('Вы получили '+vsego1+' вишен')
+
+else:
+    print('Вы получили '+vsego1+' вишен')
+
 
 
 
