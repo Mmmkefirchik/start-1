@@ -21,8 +21,8 @@ elif vsego2==1:
 elif vsego2>=2 and vsego2<=4:
     print('Вы получили '+vsego1+' вишни')
 
-elif vsego2>=0 and vsego2<=5:
-    print('Вы получили '+vsego1+' вишен')
+# elif (vsego2>=5 and vsego2<=9) or vsego2==0:
+#     print('Вы получили '+vsego1+' вишен')
 
 else:
     print('Вы получили '+vsego1+' вишен')
