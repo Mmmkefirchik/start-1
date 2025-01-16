@@ -15,30 +15,38 @@ i = time.time()
 o=time.time()
 time1 = time.time() - i
 time1 = int(time1)
-p=False
-# p=wrap.sprite.add('mario-enemies', 6, 500, 'fire_stream',p)
+
 coordinat_dino_y = wrap.sprite.get_y(d)
-coordinat_dino_x = wrap.sprite.get_y(d)
 time2 = time.time() - i
 time2 = int(time2)
 
 
-u=wrap.sprite.add('mario-enemies', coordinat_dino_x, coordinat_dino_y, 'fire_stream',p)
-
+fire=None
 while True:
-
+    #     fire:
+    h=wrap.sprite.get_right(d)
     time1 = time.time() - i
     time1 = int(time1)
     time_do_vistrela = time.time() - o
+
     if int(time_do_vistrela)==5:
-        wrap.sprite.add('mario-enemies',500,coordinat_dino_y, 'fire_stream')
+        fire=wrap.sprite.add('mario-enemies',d+100,coordinat_dino_y-3, 'fire_stream')
+        wrap.sprite.move_left_to(fire,h+5)
         o=time.time()
+        m_y=wrap.sprite.get_y(m)
+        m_x=wrap.sprite.get_x(m)
+
+    if fire!=None:
+        wrap.sprite.move_at_angle_point(fire,m_x, m_y,50)
+        wrap.sprite.set_angle_to_point(fire,m_x,m_y)
+        wrap.sprite.set_
+
     wrap.sprite_text.set_text(nomer_t, str(time1))
     wrap.sprite_text.set_text(nomer_t2,str(int(time_do_vistrela)))
 
+
     # Dino
     coordinat_dino_y = wrap.sprite.get_y(d)
-    coordinat_dino_x = wrap.sprite.get_y(d)
 
     if coordinat_dino_y<=50:
         speed_dino=5
@@ -56,21 +64,8 @@ while True:
     wrap.sprite.move(m, 0, speed_mar)
     f=wrap.sprite.get_y(d)
 
-    # if e1%5==0 and e1!=0:
-    #     wrap.sprite.add('mario-enemies',coordinat_dino_x,coordinat_dino_y, 'fire_stream', p)
-    # o = wrap.sprite.add('mario-enemies', 100, 100, 'fire_stream', p)
-    u = wrap.sprite.add('mario-enemies', 500, coordinat_dino_y, 'fire_stream',p)
 
 
-    #     p=True
-    #     wrap.sprite.move_to(u,500,coordinat_dino_y)
-    # if float(r1)%5==0 and float(r1)==0:
-    #     p=False
-    #     p=wrap.sprite.add('mario-enemies',coordinat_dino_x, coordinat_dino_y, 'fire_stream',True)
-    #     wrap.sprite.set_add(p,)
-    #     p=True
-    # if e1%5!=0:
-    #     p=False
 
 
 
