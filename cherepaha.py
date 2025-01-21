@@ -30,16 +30,25 @@ while True:
     time_do_vistrela = time.time() - o
 
     if int(time_do_vistrela)==5:
+
         fire=wrap.sprite.add('mario-enemies',d+100,coordinat_dino_y-3, 'fire_stream')
+        m_y = wrap.sprite.get_y(m)
+        m_x = wrap.sprite.get_x(m)
+
         wrap.sprite.move_left_to(fire,h+5)
         o=time.time()
-        m_y=wrap.sprite.get_y(m)
-        m_x=wrap.sprite.get_x(m)
+        wrap.sprite.set_angle_to_point(fire, m_x, m_y)
 
+        fire_ugol = wrap.sprite.get_angle(fire)
+        wrap.sprite.set_angle(fire, fire_ugol + 180)
+
+        # m_y=wrap.sprite.get_y(m)
+        # m_x=wrap.sprite.get_x(m)
     if fire!=None:
+        # wrap.sprite.set_angle_modif(fire, 180)
         wrap.sprite.move_at_angle_point(fire,m_x, m_y,50)
-        wrap.sprite.set_angle_to_point(fire,m_x,m_y)
-        wrap.sprite.set_
+        # wrap.sprite.set_angle(fire,)
+
 
     wrap.sprite_text.set_text(nomer_t, str(time1))
     wrap.sprite_text.set_text(nomer_t2,str(int(time_do_vistrela)))
