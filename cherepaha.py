@@ -20,8 +20,9 @@ coordinat_dino_y = wrap.sprite.get_y(d)
 time2 = time.time() - i
 time2 = int(time2)
 
-
+a=2
 fire=None
+fire_y=None
 while True:
     #     fire:
     h=wrap.sprite.get_right(d)
@@ -47,6 +48,7 @@ while True:
     if fire!=None:
         # wrap.sprite.set_angle_modif(fire, 180)
         wrap.sprite.move_at_angle_point(fire,m_x, m_y,50)
+        # if
         # wrap.sprite.set_angle(fire,)
 
 
@@ -73,7 +75,24 @@ while True:
     wrap.sprite.move(m, 0, speed_mar)
     f=wrap.sprite.get_y(d)
 
+    m_y = wrap.sprite.get_y(m)
+    m_x = wrap.sprite.get_x(m)
 
+    if fire!=None:
+        fire_y = wrap.sprite.get_y(fire)
+        f_m=wrap.sprite.is_collide_sprite(fire,m)
+        if f_m==True:
+            # print(fire_y,m_y)
+            break
+while m_y!=1000:
+
+    wrap.sprite.set_angle(m, a)
+    a=a+5
+
+    m_y = wrap.sprite.get_y(m)
+    m_x = wrap.sprite.get_x(m)
+    if m_y<800:
+        wrap.sprite.move(m, 0, 9)
 
 
 
