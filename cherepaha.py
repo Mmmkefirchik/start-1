@@ -75,8 +75,8 @@ while True:
     wrap.sprite.move(m, 0, speed_mar)
     f=wrap.sprite.get_y(d)
 
-    m_y = wrap.sprite.get_y(m)
-    m_x = wrap.sprite.get_x(m)
+    # m_y = wrap.sprite.get_y(m)
+    # m_x = wrap.sprite.get_x(m)
 
     if fire!=None:
         fire_y = wrap.sprite.get_y(fire)
