@@ -26,15 +26,10 @@ while papatka<2:
         papatka2=papatka2+1
 
 time2 = time.time()  # 11
-time_final = 62#time2 - time1
-w = time_final%60
-g=str(time_final%60)
+time_final = time2-time1#time2 - time1
+min=time_final//60
+sec=time_final%60
 
-
-    # g=str(int(time_final))+' секунд'
-if int(time_final-g)%60==0:
-    # w=str(int(time_final))+ 'минут'
-    w=str(int(time_final))
-if time_final<60 or time_final%60!=0:
-    g=str(int(time_final%60))+ ' секунд'
-print('Время работы - '+str(w)+" минут"+' и '+str(g))
+print('Время работы - '+str(int(min))+' мунуту(ы) и ' +str(int(sec))+' секунд(ы)')
+#Берем число (62) и находим целую(ые) часть(и) 60 (62//60=1).time_final, получаем кол-во минут.
+#Далее нужно вычесть из 62 наш результат (62%60==2).time_final, получаем кол-во сек.
