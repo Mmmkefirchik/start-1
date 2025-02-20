@@ -26,8 +26,6 @@ def zaposk(nomer_tanka):
     time.sleep(0.2)
     wrap.sprite.show(nomer_tanka)
 
-    # sprite.add("battle_city_tanks", 200, 300, "tank_enemy_size1_purple2")
-
     time.sleep(0.2)
 
 
@@ -47,14 +45,45 @@ def move_right(tank_nomer, x):
 
 
 def move_up(tank_nomer, y):
-    wrap.actions.set_angle(tank_nomer, 180, 500)
-    wrap.actions.move(tank_nomer, 0, y, 500)
+    wrap.actions.set_angle(tank_nomer, 0, 500)
+    wrap.actions.move(tank_nomer, 0, -y, 500)
 
-def shot(tank_nomer):
+def shot(tank_nomer,v_dal):
     y1=wrap.sprite.get_y(tank_nomer)
     x1=wrap.sprite.get_x(tank_nomer)
 
-    pola=sprite.add('battle_city_items',x1,y1-25, 'bullet')
+    # pola=sprite.add('battle_city_items',x1,y1-25, 'bullet')
+    ogol=wrap.sprite.get_angle(tank_nomer)
+
+    if ogol==180:
+        pola = sprite.add('battle_city_items', x1, y1 +25, 'bullet')
+        wrap.sprite.set_angle(pola,180)
+        wrap.actions.move(pola,0,v_dal,350)
+
+    elif ogol==90:
+        pola = sprite.add('battle_city_items', x1+25, y1, 'bullet')
+        wrap.sprite.set_angle(pola,90)
+        wrap.actions.move(pola,v_dal,0,350)
+
+    elif ogol==-90:
+        pola = sprite.add('battle_city_items', x1-25, y1 , 'bullet')
+        wrap.sprite.set_angle(pola, -90)
+        wrap.actions.move(pola,-v_dal,0,350)
+
+        # if ogol==0:
+    else:
+        pola = sprite.add('battle_city_items', x1, y1 - 25, 'bullet')
+        wrap.sprite.set_angle(pola,0)
+        wrap.actions.move(pola,0,-v_dal,350)
+    wrap.sprite.remove(pola)
+
+
+
+
+
+
+
+
 
     # wrap.actions.move(pola,rasst,0,500)
 
@@ -62,18 +91,23 @@ wrap.world.create_world(400, 600, 900, 50)
 tank1 = sprite.add("battle_city_tanks", 100, 300, "tank_enemy_size1_green1")
 tank2 = sprite.add("battle_city_tanks", 200, 300, "tank_enemy_size1_purple2")
 
-shot(tank1)
 # zvezda = sprite.add("battle_city_items", 500, 500, "effect_appearance1", False)
 # zaposk(tank1)
 # zaposk(tank2)
 #
-# move_down(tank1,200)
-# move_left(tank1,50)
-# move_right(tank1,200)
-# move_up(tank1,150)
-#
+move_down(tank1,150)
+shot(tank1,30)
+move_left(tank1,50)
+shot(tank1,50)
+move_right(tank1,200)
+shot(tank1,120)
+move_up(tank1,200)
+shot(tank1,73)
+
 # move_down(tank2, 0)
 # move_left(tank2, 150)
 # move_right(tank2, 100)
 # move_up(tank2, 100)
 # zaposk(tank2)
+# shot(tank1)
+#
