@@ -47,13 +47,24 @@ def vedenie(pers_nomer, cuda_x, cuda_y):
     y = wrap.sprite.get_y(pers_nomer)
     x = wrap.sprite.get_x(pers_nomer)
     print(x, y)
+
+
 def otbor(pers_nomer):
-    xa=wrap.sprite.get_x(a)
-    shir_p=wrap.sprite.get_width(pers_nomer)//2
-    shir_a=wrap.sprite.get_width(a)//2
-    niz_a=wrap.sprite.get_bottom(a)
-    niz_p=wrap.sprite.get_height(pers_nomer)//2
-    wrap.actions.move_to(pers_nomer,xa-shir_a-shir_p,niz_a-niz_p)
+    xa = wrap.sprite.get_x(a)
+    x_p_n=wrap.sprite.get_x(pers_nomer)
+    if xa>=x_p_n:
+        shir_p = wrap.sprite.get_width(pers_nomer) // 2
+        shir_a = wrap.sprite.get_width(a) // 2
+        niz_a = wrap.sprite.get_bottom(a)
+        niz_p = wrap.sprite.get_height(pers_nomer) // 2
+        wrap.actions.move_to(pers_nomer, xa - shir_a - shir_p, niz_a - niz_p)
+    if xa<=x_p_n:
+        shir_p = wrap.sprite.get_width(pers_nomer) // 2
+        shir_a = wrap.sprite.get_width(a) // 2
+        niz_a = wrap.sprite.get_bottom(a)
+        niz_p = wrap.sprite.get_height(pers_nomer) // 2
+        wrap.actions.move_to(pers_nomer, xa + shir_a + shir_p, niz_a - niz_p)
+
 
 m1 = wrap.sprite.add('mario-1-big', 300, 200, 'stand')
 wrap.sprite.set_reverse_x(m1, True)
@@ -63,13 +74,15 @@ a = wrap.sprite.add('mario-enemies', 200, 300, 'armadillo_egg')
 # rezultat=random.choice([m1,m2,c])
 
 pas(m1)
-# beg(c, 125, 499)
-# pas(m2)
-# vedenie(m2,123,677)
+beg(c, 125, 499)
+pas(m2)
+vedenie(m2,123,677)
 otbor(c)
-# pas(m1)
-# vedenie(m1,499,111)
-# pas(m2)
-# vedenie(m2, 350, 50)
-# pas(c)
-# vedenie(m2, 400, 133)
+pas(m1)
+vedenie(m1,499,111)
+pas(m2)
+vedenie(m2, 350, 50)
+pas(c)
+vedenie(c,77,89)
+otbor(m2)
+vedenie(m2, 400, 133)
