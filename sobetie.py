@@ -1,3 +1,5 @@
+from symbol import if_stmt
+
 import wrap
 
 wrap.world.create_world(500, 500)
@@ -41,6 +43,8 @@ def pogonya():
     pr_x = wrap.sprite.get_x(pr)
     pr_y = wrap.sprite.get_y(pr)
     if t_f__pr == True:
+        wrap.sprite.set_angle_to_point(p,pr_x,pr_y)
         wrap.sprite.move_at_angle_point(p, pr_x, pr_y,5)
+
 
 
