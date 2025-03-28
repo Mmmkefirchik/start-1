@@ -37,8 +37,19 @@ def pricel(pos_x,pos_y):
     global pr_p
     wrap.sprite.move_to(p,pos_x,pos_y)
     wrap.sprite.show(p)
+    wrap.sprite.set_size_percent(p,pr_p,pr_p)
     if pr_p !=150:
         pr_p = pr_p + 50
+    else:
+        wrap.sprite.hide(p)
+        pr_p=50
+    wrap.sprite.set_size_percent(p,pr_p,pr_p)
+    # if pr_p==150:
+    #     pr_p=50
+
+
+
+
 
 
 @wrap.on_mouse_move()
@@ -46,7 +57,7 @@ def dvizh_p(pos_x,pos_y):
     global pr_p
     wrap.sprite.move_to(p,pos_x,pos_y)
     wrap.sprite.set_angle(p,360)
-    wrap.sprite.set_size_percent(p,pr_p,pr_p)
+    # wrap.sprite.set_size_percent(p,pr_p,pr_p)
 
 
 
