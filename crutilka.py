@@ -4,22 +4,24 @@ import  wrap,random
 wrap.world.create_world(500,500)
 
 p=wrap.sprite.add('pacman',250,200,'enemy_blue_down2')
-m=wrap.sprite.add('mario-1-big',250,300,'stand')
-t=wrap.sprite.add('battle_city_tanks',250,100,'tank_enemy_size1_green1')
+m=wrap.sprite.add('mario-1-big',250,200,'stand')
+t=wrap.sprite.add('battle_city_tanks',250,200,'tank_enemy_size1_green1')
 cooda=95
 
 def sozd_zcertv(pos_x,pos_y):
     pk = wrap.sprite.is_collide_point(p, pos_x, pos_y)
     mk = wrap.sprite.is_collide_point(m, pos_x, pos_y)
     tk = wrap.sprite.is_collide_point(t, pos_x, pos_y)
-    if pk == True:
-        zhertva = p
+    # zhertva=None
+    # if zhertva==None :
+    if tk==True:
+        zhertva = t
     elif mk == True:
         zhertva = m
-    elif tk == True:
-        zhertva = t
+    elif pk == True:
+        zhertva = p
     else:
-        zhertva = None
+        zhertva=None
     return zhertva
 
 
