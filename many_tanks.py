@@ -1,9 +1,14 @@
 import wrap,time,random
+
+from sklad.tanki2 import pos_x
+
 wrap.world.create_world(500,500)
 
-a=range(100)
+a=range(1000)
 e=[]
 costume=['green','white','yellow','purple']
+x=0
+y=0
 for r in a:
     coor_x=random.randint(0,500)
     coor_y=random.randint(0,500)
@@ -12,4 +17,13 @@ for r in a:
 
     vibor_cost=f'tank_enemy_size{random.randint(1,4)}_{random.choice(costume)}1'
     wrap.sprite.set_costume(f,vibor_cost)
+
+
+    @wrap.on_mouse_move
+    def mouse(pos_x, pos_y):
+        global x,y
+        x=pos_x
+        y=pos_y
+    wrap.sprite.set_angle_to_point(,pos_x,pos_y)
+
 
