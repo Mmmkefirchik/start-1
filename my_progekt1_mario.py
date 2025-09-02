@@ -1,5 +1,5 @@
 import wrap
-
+from wrap_py import sprite
 
 w=500
 wrap.world.create_world(w,500)
@@ -32,21 +32,14 @@ for f in range(5,height_sten*8+180,height_sten):
 
 m=wrap.sprite.add('mario-items',1000,450,'coin')
 width_m=wrap.sprite.get_width(m)
-p=1
-i=1
-
+nomera_monet=[]
 for y in range(width_m,w,width_m*2):
-    if p==3:
-        p=4
+    if y==width_m+width_m*2*2 or y==width_m+width_m*2*3:
         continue
-    if p==0:
-        p=3
-        continue
-    n=width_m*3
     m = wrap.sprite.add('mario-items', y, 200, 'coin')
-    g=wrap.sprite.get_x(m)
-    if n == g:
-        p=0
+    nomera_monet.append(m)
+
+
 
 mar=wrap.sprite.add('mario-1-small',300,275,'jump')
 plot=wrap.sprite.add('mario-scenery',300,300,'cloud1')
@@ -93,7 +86,14 @@ def peredviszenie_y(keys):
 @wrap.on_key_down(wrap.K_SPACE)
 def priszok(keys):
         wrap.actions.move(mar,0,-50,500)
+        for b in nomera_monet.copy():
+            if wrap.sprite.is_collide_sprite(mar, b) == True:
+                wrap.sprite.remove(b)
+                nomera_monet.remove(b)
+
         wrap.actions.move(mar,0,50,500)
+
+
 
 
 

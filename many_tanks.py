@@ -3,7 +3,7 @@ import wrap,time,random
 
 wrap.world.create_world(500,500)
 
-a=range(10)
+a=range(10000)
 e=[]
 costume=['green','white','yellow','purple']
 x=0
