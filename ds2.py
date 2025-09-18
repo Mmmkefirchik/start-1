@@ -9,8 +9,22 @@ import wrap
 #
 #
 # print(a)
-print(b)
+# print(b)
+#
+#
+# l=int(input('Число?'))
+# print(l+1,l-1)
 
 
-l=int(input('Число?'))
-print(l+1,l-1)
+
+
+# a=int(input('деньги'))
+# b=int(input('ракетки'))
+# c=int(input('шарики'))
+#
+# q=a-b
+# print(q//c)
+
+
+z=int(input('цифра'))
+q=z/100
