@@ -22,7 +22,20 @@ for shag_dlya_shara in range(shirina_shara//2,600,shirina_shara):
 
 
 d=len(id_sharov)
+# crug=0
 while True:
+    l=0
     for polyot in range(0,d):
-        wrap.sprite.move(id_sharov[polyot],0,10)
-        wrap.sprite.move(nomer1[polyot],0,10)
+        if (polyot+1)%3==1:
+            l=5
+        if (polyot+1)%3==0:
+            l=15
+        if (polyot+1)%3==2:
+            l=10
+
+        wrap.sprite.move(id_sharov[polyot],0,l)
+        wrap.sprite.move(nomer1[polyot],0,l)
+
+
+
+
