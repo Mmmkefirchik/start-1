@@ -1,4 +1,4 @@
-import wrap
+import wrap,time,random
 # a=int(input('число 1'))
 # b=int(input('число 2'))
 #
@@ -26,5 +26,22 @@ import wrap
 # print(q//c)
 
 
-z=int(input('цифра'))
-q=z/100
+# z=int(input('цифра'))
+# q=z/100
+
+# ТУТ:
+# n=int(input('число'))
+#
+# a=n//60
+# b=n%60
+#
+# print(a,b)
+#
+n=int(input('число'))
+# a=n//1000000
+# b=(n-a*1000000)//10000
+v=n//1000#4
+g=(n%1000)//100#3
+d=(n%100)//10
+e=n%10
+print(v+g+d+e)
