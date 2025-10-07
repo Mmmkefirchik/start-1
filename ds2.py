@@ -37,11 +37,47 @@ import wrap,time,random
 #
 # print(a,b)
 #
-n=int(input('число'))
+# n=int(input('число'))
 # a=n//1000000
 # b=(n-a*1000000)//10000
-v=n//1000#4
-g=(n%1000)//100#3
-d=(n%100)//10
-e=n%10
-print(v+g+d+e)
+# v=n//1000#4
+# g=(n%1000)//100#3
+# d=(n%100)//10
+# e=n%10
+# print(v+g+d+e)
+
+
+d=int(input('ширина'))
+r=int(input('диаметр//2'))
+n=int(input('кол-во колец'))
+
+l=r*2*n+d*2
+print(l)
+#
+#
+# n=int(input('школьники'))
+# k=int(input('яблоки'))
+# l=(n-(k%n))%n
+# print(l)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

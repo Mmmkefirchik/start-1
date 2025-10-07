@@ -24,7 +24,6 @@ def dvizh ():
 
         wrap.sprite.move(zvezda['nomer'],zvezda['speed_x'],zvezda['speed_y'])
 
-    # for tolchok_prav_gran in gribi:
         if wrap.sprite.get_right(zvezda['nomer'])>=500:
             zvezda['speed_x']=-abs(zvezda['speed_x'])
 
@@ -36,4 +35,15 @@ def dvizh ():
 
         if wrap.sprite.get_bottom(zvezda['nomer'])>=500:
             zvezda['speed_y']=-abs(zvezda['speed_y'])
+
+@wrap.on_mouse_down(wrap.BUTTON_LEFT)
+def zbir_zvezd (pos_x,pos_y):
+    for nomer_zvezd in gribi:
+        if wrap.sprite.is_collide_point(nomer_zvezd['nomer'],pos_x,pos_y)==True:
+            wrap.sprite.remove(nomer_zvezd['nomer'])
+            gribi.remove(nomer_zvezd)
+
+
+
+
 
