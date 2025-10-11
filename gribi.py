@@ -16,7 +16,7 @@ def poyavlenie():
         "speed_y":random.choice([random.randint(-10,-1),random.randint(1,10)])
     }
     gribi.append(a)
-    # print(gribi)
+    print(gribi)
 
 @wrap.always()
 def dvizh ():
@@ -42,24 +42,37 @@ kolvo_monet=0
 kapital=wrap.sprite.add_text(str(0),50,50,text_color=(255,255,0),font_size=40)
 moneta_na_krane=wrap.sprite.add('proekt_gribi',85,50,'moneta')
 wrap.sprite.set_size_percent(moneta_na_krane,10,10)
+pushka_zapusk = 0
+
 @wrap.on_mouse_down(wrap.BUTTON_LEFT)
 def zbir_zvezd (pos_x,pos_y):
-    global kolvo_monet,pushka
+    global kolvo_monet,pushka,pushka_zapusk
     for nomer_zvezd in gribi:
+
         if wrap.sprite.is_collide_point(nomer_zvezd['nomer'],pos_x,pos_y):
             wrap.sprite.remove(nomer_zvezd['nomer'])
             gribi.remove(nomer_zvezd)
 
             kolvo_monet=kolvo_monet+1
             wrap.sprite_text.set_text(kapital,str(kolvo_monet))
-            print(kolvo_monet)
+            # print(kolvo_monet)
 
-            if kolvo_monet >= 1:
+            if kolvo_monet >= 1 and pushka_zapusk==0:
                 pushka=wrap.sprite.add('proekt_gribi',450,50,'pushka')
+                pushka_zapusk=1
 
 
-            if wrap.sprite.is_collide_point(pushka, pos_x, pos_y):
-                wrap.sprite.remove(pushka)
+@wrap.on_mouse_down(wrap.BUTTON_LEFT)
+def d (pos_x,pos_y):
+    global  pushka_zapusk
+
+    if pushka_zapusk==3:
+        return
+
+    if pushka_zapusk!=0:
+        if wrap.sprite.is_collide_point(pushka,pos_x,pos_y):
+            wrap.sprite.remove(pushka)
+            pushka_zapusk=3
 
 
 
