@@ -43,12 +43,17 @@ kolvo_monet = 0
 kapital = wrap.sprite.add_text(str(0), 50, 50, text_color=(255, 255, 0), font_size=40)
 moneta_na_krane = wrap.sprite.add('proekt_gribi', 85, 50, 'moneta')
 wrap.sprite.set_size_percent(moneta_na_krane, 10, 10)
-pushka_zapusk = 0
+
+PUSHKA_NE_PRODAYOTSA=0
+PUSHKA_V_PRODAZHE=1
+PUSHKA_KUPLENA=2
+pushka_zapusk = PUSHKA_NE_PRODAYOTSA
 
 
 @wrap.on_mouse_down(wrap.BUTTON_LEFT)
 def zbor_zvezd(pos_x, pos_y):
-    global kolvo_monet, pushka, pushka_zapusk
+    global kolvo_monet, pushka_knopka, pushka_zapusk
+
     zvezda = poisk_zvezd_po_koordinatam(pos_x, pos_y)
     if zvezda == None:
         return
@@ -58,9 +63,10 @@ def zbor_zvezd(pos_x, pos_y):
     kolvo_monet = kolvo_monet + 1
     wrap.sprite_text.set_text(kapital, str(kolvo_monet))
 
-    if kolvo_monet >= 1 and pushka_zapusk == 0:
-        pushka = wrap.sprite.add('proekt_gribi', 450, 50, 'pushka')
-        pushka_zapusk = 1
+    if kolvo_monet >= 1 and pushka_zapusk == PUSHKA_NE_PRODAYOTSA:
+        pushka_knopka = wrap.sprite.add('proekt_gribi', 450, 50, 'pushka')
+
+        pushka_zapusk = PUSHKA_V_PRODAZHE
 
 
 def poisk_zvezd_po_koordinatam(x, y):
@@ -70,13 +76,33 @@ def poisk_zvezd_po_koordinatam(x, y):
 
 
 @wrap.on_mouse_down(wrap.BUTTON_LEFT)
-def d(pos_x, pos_y):
-    global pushka_zapusk
+def prodasza_pushki(pos_x, pos_y):
+    global pushka_zapusk, pushka_ur1
 
-    if pushka_zapusk == 3 or pushka_zapusk==0:
+    if pushka_zapusk == PUSHKA_KUPLENA or pushka_zapusk==PUSHKA_NE_PRODAYOTSA:
         return
 
-    # if pushka_zapusk!=3:
-    if wrap.sprite.is_collide_point(pushka, pos_x, pos_y):
-        wrap.sprite.remove(pushka)
-        pushka_zapusk = 3
+    if wrap.sprite.is_collide_point(pushka_knopka, pos_x, pos_y):
+        wrap.sprite.remove(pushka_knopka)
+
+        pushka_ur1=wrap.sprite.add('proekt_gribi',250,500,'bashna1')
+        wrap.sprite.set_size_percent(pushka_ur1,45,45)
+        wrap.sprite.set_angle(pushka_ur1,0)
+        pushka_zapusk = PUSHKA_KUPLENA
+
+ugol=5
+@wrap.always()
+def strelba_is_pushki (pos_x,pos_y):
+    global ugol
+    if pushka_zapusk!=PUSHKA_KUPLENA:
+        return
+    # x_y=wrap.sprite.get_pos(zvezda['nomer'])
+    # wrap.sprite.set_angle_to_point(pushka_ur1,x_y[0],x_y[1])
+    ugol=ugol+5
+    if ugol>=90:
+        wrap.sprite.set_angle(pushka_ur1,-ugol)
+    if ugol<=270:
+        wrap.sprite.set_angle(pushka_ur1,ugol)
+
+
+
