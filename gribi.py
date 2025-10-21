@@ -1,10 +1,10 @@
 import wrap, random
-from wrap_mENdRU.sprite import remove
-
+pushka_ur1=None
 wrap.add_sprite_dir('sklad')
 wrap.world.create_world(500, 500)
 
 gribi = []
+puli = []
 
 colvo_grib = len(gribi)
 
@@ -91,18 +91,64 @@ def prodasza_pushki(pos_x, pos_y):
         pushka_zapusk = PUSHKA_KUPLENA
 
 ugol=5
+
+check_na_zaskok = False
+
+
 @wrap.always()
 def strelba_is_pushki (pos_x,pos_y):
-    global ugol
+    global ugol,check_na_zaskok
     if pushka_zapusk!=PUSHKA_KUPLENA:
         return
-    # x_y=wrap.sprite.get_pos(zvezda['nomer'])
-    # wrap.sprite.set_angle_to_point(pushka_ur1,x_y[0],x_y[1])
-    ugol=ugol+5
-    if ugol>=90:
-        wrap.sprite.set_angle(pushka_ur1,-ugol)
-    if ugol<=270:
-        wrap.sprite.set_angle(pushka_ur1,ugol)
+
+    ugol_pushki=wrap.sprite.get_angle(pushka_ur1)
+    if ugol_pushki>=90:
+        check_na_zaskok=True
+    if ugol_pushki<-90:
+        check_na_zaskok=False
+
+    if check_na_zaskok==False:
+        ugol = ugol + 5
+
+    if check_na_zaskok==True:
+        ugol = ugol - 5
+
+    wrap.sprite.set_angle(pushka_ur1, ugol)
+
+x=0
+y=0
+@wrap.always(1000)
+def strelba ():
+    if pushka_zapusk!=PUSHKA_KUPLENA:
+        return
+
+    ugol_pushki=wrap.sprite.get_angle(pushka_ur1)
+    x_y=wrap.sprite.get_pos(pushka_ur1)
+
+    pula=wrap.sprite.add('pacman',x_y[0],x_y[1],'dot')
+    pula_coordinat= {'nomer':pula,
+           'ugol':ugol_pushki}
+
+    puli.append(pula_coordinat)
+
+
+    wrap.sprite.move_at_angle(pula,ugol_pushki,140)
+
+distanciya=5
+@wrap.always()
+def polet_pul ():
+    global distanciya
+    for pula in puli:
+        xy=wrap.sprite.get_pos(pula['nomer'])
+
+        if xy[0]>=500 or xy[0]<0 or xy[1]<0:
+            puli.remove(pula)
+
+
+        wrap.sprite.move_at_angle(pula['nomer'],pula['ugol'],distanciya)
+        print(len(puli))
+
+
 
 
 
