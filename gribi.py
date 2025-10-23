@@ -1,4 +1,6 @@
 import wrap, random
+from wrap_mENdRU.sprite import remove
+
 pushka_ur1=None
 wrap.add_sprite_dir('sklad')
 wrap.world.create_world(500, 500)
@@ -8,6 +10,35 @@ puli = []
 
 colvo_grib = len(gribi)
 
+def poisk_zvezd_po_koordinatam(x, y):
+    for zvezda in gribi:
+        if wrap.sprite.is_collide_point(zvezda['nomer'], x, y):
+            return zvezda
+def zbivanie_zvezd ():
+
+    if pushka_zapusk != PUSHKA_KUPLENA:
+        return
+
+    for pula in puli.copy():
+        x_pola=wrap.sprite.get_x(pula['nomer'])
+        y_pola=wrap.sprite.get_y(pula['nomer'])
+
+        zvezda_mertva=poisk_zvezd_po_koordinatam(x_pola,y_pola)
+        if zvezda_mertva == None:
+            continue
+
+        wrap.sprite.remove(zvezda_mertva['nomer'])
+        gribi.remove(zvezda_mertva)
+
+        wrap.sprite.remove(pula['nomer'])
+        puli.remove(pula)
+# for zvezdi in gribi.copy():
+        #     if wrap.sprite.is_collide_point(zvezdi['nomer'],x_pola,y_pola):
+        #         wrap.sprite.remove(zvezdi['nomer'])
+        #         gribi.remove(zvezdi)
+        #         wrap.sprite.remove(pula['nomer'])
+        #         puli.remove(pula)
+        #         break
 
 @wrap.always(1000)
 def poyavlenie():
@@ -37,6 +68,7 @@ def dvizh():
 
         if wrap.sprite.get_bottom(zvezda['nomer']) >= 500:
             zvezda['speed_y'] = -abs(zvezda['speed_y'])
+    zbivanie_zvezd()
 
 
 kolvo_monet = 0
@@ -69,10 +101,6 @@ def zbor_zvezd(pos_x, pos_y):
         pushka_zapusk = PUSHKA_V_PRODAZHE
 
 
-def poisk_zvezd_po_koordinatam(x, y):
-    for zvezda in gribi:
-        if wrap.sprite.is_collide_point(zvezda['nomer'], x, y):
-            return zvezda
 
 
 @wrap.on_mouse_down(wrap.BUTTON_LEFT)
@@ -147,8 +175,13 @@ def polet_pul ():
 
         wrap.sprite.move_at_angle(pula['nomer'],pula['ugol'],distanciya)
         print(len(puli))
+    zbivanie_zvezd()
 
 
 
 
 
+
+
+import wrap_py
+wrap_py.app.start()
