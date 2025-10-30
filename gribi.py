@@ -23,6 +23,13 @@ check_na_zaskok = False
 x = 0
 y = 0
 distanciya = 5
+
+PLUS_ODIN=20
+skor_puli=PLUS_ODIN
+pushka_baf = False
+procach_skor_puli = None
+
+
 def delete_zvezd(x, y):
     a = poisk_zvezd_po_koordinatam(x, y)
 
@@ -105,7 +112,7 @@ def zbor_zvezd(pos_x, pos_y):
         return
 
     plus_money()
-    if kolvo_monet >= 10 and pushka_zapusk == PUSHKA_NE_PRODAYOTSA:
+    if kolvo_monet >= 1 and pushka_zapusk == PUSHKA_NE_PRODAYOTSA:
         pushka_knopka = wrap.sprite.add('proekt_gribi', 450, 50, 'pushka')
 
         pushka_zapusk = PUSHKA_V_PRODAZHE
@@ -125,8 +132,8 @@ def prodasza_pushki(pos_x, pos_y):
         wrap.sprite.set_angle(pushka_ur1, 0)
         pushka_zapusk = PUSHKA_KUPLENA
 
-        plus_money(-10)
-
+        # plus_money(-10)
+        #TODO не забыть
 
 
 
@@ -187,6 +194,26 @@ def polet_pul():
         wrap.sprite.move_at_angle(pula['nomer'], pula['ugol'], distanciya)
         print(len(puli))
     zbivanie_zvezd()
+
+
+@wrap.on_mouse_down(wrap.BUTTON_LEFT)
+def procachka_puli(pos_x,pos_y):
+    global skor_puli,pushka_baf,procach_skor_puli
+    if pushka_zapusk!=PUSHKA_KUPLENA:
+        return
+
+    if kolvo_monet==2:
+        skor_puli=PLUS_ODIN+5
+        procach_skor_puli=wrap.sprite.add('proekt_gribi',250,250,'pushka')
+        pushka_baf=True
+
+
+    if pushka_baf==True and wrap.sprite.is_collide_point(procach_skor_puli,pos_x,pos_y)==True:
+        wrap.sprite.remove(procach_skor_puli)
+
+
+
+
 
 
 import wrap_py
