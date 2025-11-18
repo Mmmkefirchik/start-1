@@ -1,33 +1,49 @@
 import wrap, random
-
-pushka_ur1 = None
+wrap.world.create_world(600, 500)
 wrap.add_sprite_dir('sklad')
-wrap.world.create_world(500, 500)
 
 gribi = []
-puli = []
-kapital = wrap.sprite.add_text(str(0), 50, 50, text_color=(255, 255, 0), font_size=40)
-
 colvo_grib = len(gribi)
-kolvo_monet = 0
-moneta_na_krane = wrap.sprite.add('proekt_gribi', 85, 50, 'moneta')
+
+puli = []
+
+
+moneta_na_krane = wrap.sprite.add('proekt_gribi', 560, 50, 'moneta')
 wrap.sprite.set_size_percent(moneta_na_krane, 10, 10)
+
+kapital = wrap.sprite.add_text(str(0), 525, 50, text_color=(255, 255, 0), font_size=40)
+kolvo_monet = 0
+
 
 PUSHKA_NE_PRODAYOTSA = 0
 PUSHKA_V_PRODAZHE = 1
 PUSHKA_KUPLENA = 2
 pushka_zapusk = PUSHKA_NE_PRODAYOTSA
+
+PUSHKA_V_PROKACHKE=0
+PUSHKA_PROKACHENA=1
+prokach_pushka=PUSHKA_V_PROKACHKE
+
+pushka_ur1 = None
+
+# PLUS_ODIN=20
+# skor_puli=PLUS_ODIN
+pushka_baf = False
+# procach_skor_puli = None
+
+
 ugol = 5
 
+
 check_na_zaskok = False
+
 x = 0
 y = 0
 distanciya = 5
 
-PLUS_ODIN=20
-skor_puli=PLUS_ODIN
-pushka_baf = False
-procach_skor_puli = None
+
+
+
 
 
 def delete_zvezd(x, y):
@@ -41,10 +57,16 @@ def delete_zvezd(x, y):
     gribi.remove(a)
     return True
 
+
+
 def plus_money(dohod=1):
-    global kolvo_monet
+    global kolvo_monet,a,knopka_prokachka_pushka
     kolvo_monet = kolvo_monet + dohod
     wrap.sprite_text.set_text(kapital, str(kolvo_monet))
+
+    if prokach_pushka == PUSHKA_V_PROKACHKE and kolvo_monet >=2:
+        knopka_prokachka_pushka = wrap.sprite.add('proekt_gribi', 550, 250, 'pushka')
+        a=True
 
 
 
@@ -52,6 +74,7 @@ def poisk_zvezd_po_koordinatam(x, y):
     for zvezda in gribi:
         if wrap.sprite.is_collide_point(zvezda['nomer'], x, y):
             return zvezda
+
 
 
 def zbivanie_zvezd():
@@ -70,6 +93,47 @@ def zbivanie_zvezd():
         plus_money()
 
 
+def zbor_zvezd(pos_x, pos_y):
+    global kolvo_monet, pushka_knopka, pushka_zapusk, pushka_ur1, kolvo_monet
+
+    if delete_zvezd(pos_x, pos_y) == None:
+        return
+
+    plus_money()
+    if kolvo_monet >= 1 and pushka_zapusk == PUSHKA_NE_PRODAYOTSA:
+        pushka_knopka = wrap.sprite.add('proekt_gribi', 550, 150, 'pushka')
+
+        pushka_zapusk = PUSHKA_V_PRODAZHE
+    return True
+
+
+
+def prodasza_pushki(pos_x, pos_y):
+    global pushka_zapusk, pushka_ur1,kolvo_monet
+
+    if pushka_zapusk == PUSHKA_KUPLENA or pushka_zapusk == PUSHKA_NE_PRODAYOTSA:
+        return
+
+
+
+    if wrap.sprite.is_collide_point(pushka_knopka, pos_x, pos_y):
+            wrap.sprite.remove(pushka_knopka)
+
+            pushka_ur1 = wrap.sprite.add('proekt_gribi', 250, 500, 'bashna1')
+            wrap.sprite.set_size_percent(pushka_ur1, 45, 45)
+            wrap.sprite.set_angle(pushka_ur1, 0)
+            pushka_zapusk = PUSHKA_KUPLENA
+
+            # plus_money(-10)
+        #TODO не забыть
+
+
+
+
+
+
+
+
 @wrap.always(1000)
 def poyavlenie():
     a = {
@@ -78,7 +142,7 @@ def poyavlenie():
         "speed_y": random.choice([random.randint(-10, -1), random.randint(1, 10)])
     }
     gribi.append(a)
-    # print(gribi)
+
 
 
 @wrap.always()
@@ -102,38 +166,20 @@ def dvizh():
 
 
 
-
-
 @wrap.on_mouse_down(wrap.BUTTON_LEFT)
-def zbor_zvezd(pos_x, pos_y):
-    global kolvo_monet, pushka_knopka, pushka_zapusk
+def click (pos_x,pos_y):
+    global knopka_prokachka_pushka,a,distanciya
+    a=False
 
-    if delete_zvezd(pos_x, pos_y) == None:
-        return
+    if zbor_zvezd(pos_x,pos_y)==None:
+        if a==True:
+            wrap.sprite.remove(knopka_prokachka_pushka)
+            distanciya=distanciya*2
 
-    plus_money()
-    if kolvo_monet >= 1 and pushka_zapusk == PUSHKA_NE_PRODAYOTSA:
-        pushka_knopka = wrap.sprite.add('proekt_gribi', 450, 50, 'pushka')
-
-        pushka_zapusk = PUSHKA_V_PRODAZHE
+        prodasza_pushki(pos_x,pos_y)
 
 
-@wrap.on_mouse_down(wrap.BUTTON_LEFT)
-def prodasza_pushki(pos_x, pos_y):
-    global pushka_zapusk, pushka_ur1,kolvo_monet
 
-    if pushka_zapusk == PUSHKA_KUPLENA or pushka_zapusk == PUSHKA_NE_PRODAYOTSA:
-        return
-    if wrap.sprite.is_collide_point(pushka_knopka, pos_x, pos_y):
-        wrap.sprite.remove(pushka_knopka)
-
-        pushka_ur1 = wrap.sprite.add('proekt_gribi', 250, 500, 'bashna1')
-        wrap.sprite.set_size_percent(pushka_ur1, 45, 45)
-        wrap.sprite.set_angle(pushka_ur1, 0)
-        pushka_zapusk = PUSHKA_KUPLENA
-
-        # plus_money(-10)
-        #TODO не забыть
 
 
 
@@ -160,8 +206,6 @@ def strelba_is_pushki(pos_x, pos_y):
 
 
 
-
-
 @wrap.always(1000)
 def strelba():
     if pushka_zapusk != PUSHKA_KUPLENA:
@@ -180,36 +224,52 @@ def strelba():
 
 
 
-
-
 @wrap.always()
 def polet_pul():
     global distanciya
-    for pula in puli:
+    for pula in puli.copy():
         xy = wrap.sprite.get_pos(pula['nomer'])
 
         if xy[0] >= 500 or xy[0] < 0 or xy[1] < 0:
+            wrap.sprite.remove(pula['nomer'])
             puli.remove(pula)
+            continue
+
 
         wrap.sprite.move_at_angle(pula['nomer'], pula['ugol'], distanciya)
-        print(len(puli))
+
     zbivanie_zvezd()
 
 
-@wrap.on_mouse_down(wrap.BUTTON_LEFT)
-def procachka_puli(pos_x,pos_y):
-    global skor_puli,pushka_baf,procach_skor_puli
-    if pushka_zapusk!=PUSHKA_KUPLENA:
-        return
 
-    if kolvo_monet==2:
-        skor_puli=PLUS_ODIN+5
-        procach_skor_puli=wrap.sprite.add('proekt_gribi',250,250,'pushka')
-        pushka_baf=True
+# @wrap.on_mouse_down(wrap.BUTTON_LEFT)
 
 
-    if pushka_baf==True and wrap.sprite.is_collide_point(procach_skor_puli,pos_x,pos_y)==True:
-        wrap.sprite.remove(procach_skor_puli)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # if pushka_zapusk!=PUSHKA_KUPLENA:
+    #     return
+    #
+    # if kolvo_monet==2:
+    #     # skor_puli=PLUS_ODIN+5
+    #     procach_skor_puli=wrap.sprite.add('proekt_gribi',550,250,'pushka')
+    #     # pushka_baf=True
+    #
+    #
+    # if pushka_baf==True and wrap.sprite.is_collide_point(procach_skor_puli,pos_x,pos_y)==True:
+    #     wrap.sprite.remove(procach_skor_puli)
 
 
 

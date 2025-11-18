@@ -24,8 +24,23 @@ import wrap
 #
 # stranici
 #
-k=int(input('строки?'))#5
-n=int(input('номер строки?'))#15
+# k=int(input('строки?'))#5
+# n=int(input('номер строки?'))#15
+#
+# a=(n-1)//k+1
+# b=(n-1)%k+1
+#
+# print(a,b)
 
 
+# pirozhki
 
+a=int(input('копеййки?'))
+b=int(input('рубли?'))
+v=int(input('пирожки?'))
+
+s=(b*100+a)*v
+d=s//100
+f=s%100
+
+print(d,f)
